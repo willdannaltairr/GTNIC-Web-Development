@@ -118,6 +118,42 @@ git remote add origin https://github.com/willdannaltairr/GTNIC-Web-Development.g
 git remote set-url origin https://github.com/willdannaltairr/GTNIC-Web-Development.git
 ```
 
+## Strategi Branch (menyesuaikan folder backend/frontend)
+
+```text
+main                         # produksi, stabil, hanya via merge dari develop
+develop                      # integrasi backend + frontend
+backend                      # kerja khusus backend/myapp
+frontend                     # kerja khusus frontend/my-app
+feature/backend-<nama>       # fitur backend, mis. feature/backend-auth
+feature/frontend-<nama>      # fitur frontend, mis. feature/frontend-login-ui
+fix/backend-<nama>           # bug backend, mis. fix/backend-cors
+fix/frontend-<nama>          # bug frontend, mis. fix/frontend-mobile-layout
+```
+
+Aturan:
+- `main` ← `develop` ← `backend` / `frontend` ← `feature/*` / `fix/*`
+- 1 branch = 1 tujuan, 1 folder fokus (`backend/myapp` ATAU `frontend/my-app`).
+- Jangan commit langsung ke `main`, selalu lewat `develop`.
+
+```bash
+git branch -a
+git checkout -b develop
+git push -u origin develop
+
+git checkout -b backend
+git push -u origin backend
+
+git checkout -b frontend
+git push -u origin frontend
+
+# contoh kerja fitur:
+git checkout develop
+git checkout -b feature/backend-auth
+git checkout develop
+git checkout -b feature/frontend-login-ui
+```
+
 ## Konvensi Commit
 
 - `feat:` fitur baru
